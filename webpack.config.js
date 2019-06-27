@@ -91,7 +91,7 @@ module.exports = env => {
 						{
 							loader: 'file-loader',
 							options: {
-								name: env === 'production' ? '[name].[hash:12].[ext]' : '[name].[ext]',
+								name: '[name].[ext]',
 								outputPath: 'images'
 							}
 						}
@@ -104,7 +104,7 @@ module.exports = env => {
 							loader: 'url-loader',
 							options: {
 								name: '[name].[ext]',
-								outputPath: 'css/fonts'
+								outputPath: 'fonts'
 							}
 						}
 					]

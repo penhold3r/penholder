@@ -37,15 +37,15 @@ const ProjectPage = ({ location, match }) => {
 		const { description, modules, tools, fields, url } = data.project
 		const project = { description, modules, tools, fields, url }
 
-		localStorage.setItem(`project-${id}`, JSON.stringify(project))
+		sessionStorage.setItem(`project-${id}`, JSON.stringify(project))
 		setProject(project)
-		console.log('PROJECT: ', project)
+		process.env.NODE_ENV === 'development' && console.log('PROJECT: ', project)
 	}
 
 	id &&
 		useEffect(() => {
-			const localProject = localStorage.getItem(`project-${id}`)
-			console.log('LOCAL PROJECT: ', localProject)
+			const localProject = sessionStorage.getItem(`project-${id}`)
+			process.env.NODE_ENV === 'development' && console.log('LOCAL PROJECT: ', localProject)
 
 			if (localProject) setProject(JSON.parse(localProject))
 			else fetchProject()
