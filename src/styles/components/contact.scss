@@ -1,0 +1,80 @@
+.contact {
+	@include tablet {
+		padding-top: 2rem;
+	}
+	&__title {
+		color: $main-color;
+		font-size: 2.5rem;
+		text-align: center;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		max-width: 500px;
+		margin: 0 auto;
+
+		.form-field {
+			position: relative;
+			margin-bottom: 1rem;
+
+			.field {
+				transition: all 0.3s;
+				font-family: $main-font;
+				width: 100%;
+				padding: 0.5rem;
+				border: 1px solid $main-color;
+				border-radius: 6px;
+				background: transparent;
+				font-size: 1.25rem;
+				color: $grey;
+
+				@include placeholder {
+					color: $main-color;
+					opacity: 1;
+					transition: all 0.3s;
+				}
+
+				&.textarea {
+					resize: vertical;
+					height: 2.75rem;
+					overflow: hidden;
+
+					&:focus {
+						height: 6rem;
+						overflow: auto;
+					}
+				}
+
+				&:focus {
+					background: #fff;
+					border-color: $grey;
+
+					@include placeholder {
+						color: transparent;
+						padding-left: 2rem;
+					}
+				}
+			}
+		}
+
+		.submit {
+			background: $secondary-color;
+			font-family: $main-font;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: $grey;
+			transition: all 0.3s;
+			cursor: pointer;
+			text-align: center;
+			padding: 0.5rem;
+			border-radius: 6px;
+			border: none;
+
+			&:hover {
+				background: $main-color;
+				color: #fff;
+			}
+		}
+	}
+}

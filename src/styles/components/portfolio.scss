@@ -1,0 +1,94 @@
+.portfolio {
+	overflow-x: hidden;
+	position: relative;
+	max-width: 1000px;
+	margin: 0 auto;
+
+	@include tablet {
+		padding-top: 2rem;
+	}
+
+	&__title {
+		font-size: 2.5rem;
+		margin: 0.75rem 0 1rem;
+		padding-right: 1rem;
+		position: relative;
+		display: inline-block;
+
+		&:after {
+			background: $main-color;
+			bottom: 0.75rem;
+			content: '';
+			height: 1px;
+			left: 100%;
+			position: absolute;
+			width: 100vw;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		grid-gap: 1rem;
+		margin: 0;
+		padding: 0;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		list-style: none;
+
+		.project-card {
+			background: #ccc;
+			overflow: hidden;
+			border-radius: 0.75rem;
+			transition: all 0.4s;
+			padding: 0;
+
+			&__link {
+				text-decoration: none;
+			}
+
+			&__image--wrapper {
+				position: relative;
+				overflow: hidden;
+				height: 16rem;
+				transition: 0.3s;
+			}
+
+			&__image {
+				animation: fadeIn 0.5s ease-in 0.5s forwards;
+				display: block;
+				height: 100%;
+				object-fit: cover;
+				transition: all 0.5s;
+				width: 100%;
+				opacity: 0;
+			}
+
+			&__title {
+				text-transform: uppercase;
+				letter-spacing: 0.05rem;
+				color: #fff;
+				font-weight: normal;
+				line-height: 1;
+				margin: 0;
+				padding: 1rem;
+				transition: all 0.3s;
+			}
+
+			&:hover {
+				//opacity: 0.5;
+				background: $main-color;
+				transform: translateY(-6px);
+				box-shadow: 0 3px 6px $grey;
+				padding-bottom: 2rem;
+
+				.project-card__image--wrapper {
+					opacity: 0.75;
+					height: 14rem;
+				}
+
+				.project-card__title {
+					opacity: 0.9;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,158 @@
+.project {
+	position: relative;
+	padding: 1rem 0 3rem;
+	max-width: 1000px;
+	margin: 0 auto;
+
+	@include tablet {
+		padding: 2rem 0 0;
+	}
+
+	&__title {
+		background: $light;
+		font-size: 2rem;
+		letter-spacing: 0.05rem;
+		line-height: 1;
+		margin: 0;
+		position: sticky;
+		text-transform: uppercase;
+		top: 0;
+
+		@include tablet {
+			font-size: 1.75rem;
+			padding: 0.5rem 0;
+			top: 100px;
+		}
+	}
+
+	.fields {
+		display: flex;
+		margin: 0.5rem 0 0;
+
+		&__tag {
+			border-radius: 3px;
+			font-size: 0.8rem;
+			letter-spacing: 0.1rem;
+			margin: 0 1rem 1rem 0;
+			padding: 0 0.5rem;
+			text-transform: uppercase;
+		}
+	}
+
+	&__description {
+		font-size: 1.25rem;
+		margin: 0 0 1rem;
+	}
+
+	&__content {
+		img {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	&__footer {
+		border-top: 1px solid $secondary-color;
+		display: flex;
+		justify-content: space-between;
+		margin: 2rem 0 0;
+		padding: 1rem 0 0;
+
+		@include tablet {
+			flex-direction: column;
+		}
+
+		.tools {
+			display: flex;
+			align-items: center;
+
+			@include tablet {
+				flex-direction: column;
+			}
+
+			&__title {
+				color: $main-color;
+				line-height: 1.5rem;
+				margin: 0.25rem 0;
+				padding-right: 1rem;
+
+				@include tablet {
+					margin: 0 0 0.5rem;
+					padding: 0;
+				}
+			}
+
+			&__icons {
+				display: flex;
+				align-items: center;
+
+				@include tablet {
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+
+				.tool {
+					display: flex;
+					align-items: center;
+					margin-right: 1rem;
+
+					&__icon {
+						font-size: 1.5rem;
+						height: 1.5rem;
+						line-height: 1.5rem;
+						margin: 0.25rem;
+						text-transform: uppercase;
+					}
+
+					small {
+						display: inline-block;
+						line-height: 1.5rem;
+
+						@include tablet {
+							font-size: 90%;
+						}
+					}
+				}
+			}
+		}
+
+		.behance-link {
+			align-self: flex-end;
+
+			@include tablet {
+				align-self: center;
+				margin: 3rem 0 0;
+			}
+
+			a {
+				background: #fff;
+				border-radius: 50%;
+				color: $grey;
+				display: flex;
+				height: 40px;
+				line-height: 1;
+				text-align: center;
+				text-decoration: none;
+				text-transform: uppercase;
+				transition: all 0.3s;
+				width: 40px;
+
+				@include tablet {
+					box-shadow: 0 2px 3px rgba($grey, 0.5);
+					font-size: 1.5rem;
+					height: 60px;
+					width: 60px;
+				}
+
+				.icon {
+					margin: auto;
+				}
+
+				&:hover {
+					background: #1769ff;
+					color: #fff;
+				}
+			}
+		}
+	}
+}

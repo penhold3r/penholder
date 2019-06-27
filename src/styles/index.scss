@@ -1,0 +1,113 @@
+@import './includes/*.scss';
+
+*,
+*:after,
+*:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-appearance: none !important;
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	outline: none;
+}
+
+body {
+	background: linear-gradient($main-color, $secondary-color);
+	color: $grey;
+	font-family: $main-font;
+	position: relative;
+	scroll-behavior: smooth;
+
+	@include tablet {
+		background: linear-gradient(90deg, $main-color, $secondary-color);
+	}
+
+	#main {
+		display: grid;
+		grid-template-columns: minmax(200px, 1fr) 5fr;
+
+		@include tablet {
+			display: block;
+		}
+
+		.main-content {
+			animation: slideRight 0.6s ease-in-out forwards, fadeIn 0.6s ease-in forwards;
+			border-radius: 1.5rem 0 0 0;
+			background: $light;
+			position: relative;
+			padding: 0 2rem 2rem;
+			z-index: 1;
+			opacity: 0;
+
+			@include tablet {
+				animation: none;
+				border-radius: 0 0 1.5rem 1.5rem;
+				opacity: 1;
+				padding: 0 1rem 2rem;
+				top: -2rem;
+			}
+
+			> * {
+				animation: fadeIn 0.6s ease-in 0.3s forwards;
+				opacity: 0;
+			}
+		}
+	}
+}
+
+.image-placeholder {
+	animation: fadeOut 0.6s ease-in 0.5s forwards;
+	background-repeat: no-repeat;
+	background-size: cover;
+	filter: blur(10px);
+	height: 100%;
+	position: absolute;
+	transition: all 0.5s;
+	width: 100%;
+}
+
+.icon-javascript {
+	position: relative;
+
+	&:after {
+		background: #333;
+		content: '';
+		height: calc(100% - 0.2em);
+		left: 0.1em;
+		position: absolute;
+		top: 0.1em;
+		z-index: -1;
+		width: calc(100% - 0.2em);
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes slideRight {
+	0% {
+		transform: translateX(50px);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@import './components/*.scss';
