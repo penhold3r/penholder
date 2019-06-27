@@ -4,8 +4,6 @@ import { Link as ReactLink } from 'react-router-dom'
 const Link = ({ children, to, ...other }) => {
 	const internal = /^\/(?!\/)/.test(to) || typeof to === 'object'
 
-	console.log(internal)
-
 	return internal ? (
 		<ReactLink to={to} {...other}>
 			{children}

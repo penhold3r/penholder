@@ -6,7 +6,7 @@ import Header from './Header'
 import Footer from './Footer'
 
 import 'sanitize.css'
-//import '../styles/icons.scss'
+import '../styles/icons.scss'
 import '../styles/index.scss'
 
 import ICO from '../images/favicon.ico'

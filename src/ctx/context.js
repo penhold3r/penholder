@@ -44,7 +44,7 @@ const Provider = ({ children }) => {
 	useEffect(() => {
 		getProjects()
 		getProfile()
-	})
+	}, [])
 
 	return <Context.Provider value={{ profile, projects }}>{children}</Context.Provider>
 }

@@ -60,12 +60,11 @@ module.exports = env => {
 					test: /\.(s?css)$/,
 					use: [
 						{
-							loader: 'css-hot-loader',
-							options: {}
-						},
-						{
 							loader: MiniCssExtractPlugin.loader,
-							options: {}
+							options: {
+								hmr: process.env.NODE_ENV === 'development',
+								reloadAll: true
+							}
 						},
 						{
 							loader: 'css-loader',
@@ -98,7 +97,7 @@ module.exports = env => {
 					]
 				},
 				{
-					test: /\.(eot|svg|ttf|woff|woff2)$/,
+					test: /\.(eot|svg|ttf|woff2?)$/,
 					use: [
 						{
 							loader: 'url-loader',
