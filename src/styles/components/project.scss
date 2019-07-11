@@ -14,20 +14,28 @@
 		letter-spacing: 0.05rem;
 		line-height: 1;
 		margin: 0;
+		padding: 0.5rem 0 1rem;
 		position: sticky;
 		text-transform: uppercase;
 		top: 0;
 
 		@include tablet {
+			text-align: center;
 			font-size: 1.75rem;
-			padding: 0.5rem 0;
+			padding: 1rem 0 1.25rem;
+			margin: 0 0 1rem;
 			top: 100px;
 		}
 	}
 
 	.fields {
 		display: flex;
-		margin: 0.5rem 0 0;
+		flex-wrap: wrap;
+		margin: 0.75rem 0 0;
+
+		@include tablet {
+			justify-content: center;
+		}
 
 		&__tag {
 			border-radius: 3px;
@@ -36,12 +44,22 @@
 			margin: 0 1rem 1rem 0;
 			padding: 0 0.5rem;
 			text-transform: uppercase;
+
+			@include tablet {
+				font-size: 0.9rem;
+				margin: 0 0.5rem 0.5rem 0;
+			}
 		}
 	}
 
 	&__description {
 		font-size: 1.25rem;
 		margin: 0 0 1rem;
+
+		@include tablet {
+			padding: 1rem 0;
+			text-align: center;
+		}
 	}
 
 	&__content {

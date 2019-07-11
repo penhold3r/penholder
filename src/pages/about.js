@@ -28,7 +28,7 @@ const About = () => {
 	console.log(profile)
 
 	return (
-		<Layout pageTitle="About Me">
+		<Layout pageTitle="About Me" overflow={true}>
 			<section className="about">
 				<header className="about__header">
 					<img src={hero && hero} alt="" />

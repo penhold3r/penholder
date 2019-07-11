@@ -1,12 +1,40 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 
+import submitForm from '../utils/submit-form'
+
 const Contact = () => {
-	const [inputs, setInputs] = useState({})
+	const [inputs, setInputs] = useState({
+		name: '',
+		email: '',
+		message: ''
+	})
+
+	const contactMsgs = () => ({
+		successMsg: 'Message sent!',
+		errorMsg: 'Something went wrong, try again later.',
+		sending: 'Sending...'
+	})
 
 	const handleSubmit = event => {
 		event && event.preventDefault()
-		sendForm(event)
+
+		console.log(inputs)
+
+		submitForm(event.target, {
+			dest: '/',
+			fields: '.field',
+			successMsg: contactMsgs().successMsg,
+			errorMsg: contactMsgs().errorMsg,
+			sending: contactMsgs().sending,
+			urlencoded: true
+		})
+
+		setInputs({
+			name: '',
+			email: '',
+			message: ''
+		})
 	}
 
 	const handleInputChange = event => {
@@ -18,14 +46,18 @@ const Contact = () => {
 		}))
 	}
 
-	const sendForm = () => {
-		console.log(inputs)
-	}
 	return (
 		<Layout pageTitle="Contact">
 			<section className="contact">
 				<h2 className="contact__title">Let's Talk</h2>
-				<form className="contact__form" onSubmit={handleSubmit}>
+				<form
+					name="contact"
+					method="POST"
+					data-netlify="true"
+					className="contact__form"
+					onSubmit={handleSubmit}
+				>
+					<input type="hidden" name="form-name" value="contact" />
 					<div className="form-field">
 						<input
 							className="field"
@@ -33,7 +65,8 @@ const Contact = () => {
 							name="name"
 							value={inputs.name}
 							placeholder="Your name"
-							onChange={handleInputChange}
+							onChange={e => handleInputChange(e)}
+							required
 						/>
 					</div>
 					<div className="form-field">
@@ -44,6 +77,7 @@ const Contact = () => {
 							value={inputs.email}
 							placeholder="Your e-mail"
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div className="form-field">
@@ -53,6 +87,7 @@ const Contact = () => {
 							value={inputs.message}
 							placeholder="What can I help you with?"
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<input className="submit" type="submit" value="Send" />

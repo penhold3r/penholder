@@ -12,7 +12,7 @@ import '../styles/index.scss'
 import ICO from '../images/favicon.ico'
 import PNG from '../images/favicon.png'
 
-const Layout = ({ pageTitle, children }) => {
+const Layout = ({ pageTitle, children, overflow }) => {
 	const title = 'penHolder Designerd'
 	const siteTitle = pageTitle ? `${pageTitle} - ${title}` : title
 	return (
@@ -54,7 +54,7 @@ const Layout = ({ pageTitle, children }) => {
 			/>
 
 			<Header siteTitle={title} />
-			<div className="main-content">{children}</div>
+			<div className={overflow ? 'main-content overflow' : 'main-content'}>{children}</div>
 			<Footer />
 		</>
 	)

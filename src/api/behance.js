@@ -1,6 +1,6 @@
 //const key = process.env.API_KEY
 const key = 'Mylbyvky3p0nNTzbpWbLbbBruX5wiNjt'
-const cors = 'https://cors-anywhere.herokuapp.com/'
+export const cors = 'https://cors-anywhere.herokuapp.com/'
 
 export const behanceProfile = name =>
 	`${cors}https://api.behance.net/v2/users/${name}?api_key=${key}`

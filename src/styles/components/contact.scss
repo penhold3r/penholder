@@ -67,13 +67,25 @@
 			transition: all 0.3s;
 			cursor: pointer;
 			text-align: center;
-			padding: 0.5rem;
+			padding: 0.75rem 1rem;
 			border-radius: 6px;
 			border: none;
 
 			&:hover {
 				background: $main-color;
 				color: #fff;
+			}
+		}
+
+		.output-msg {
+			background: #fff;
+			border-radius: 0.5rem;
+			margin-top: 1rem;
+
+			p {
+				padding: 1rem;
+				margin: 0;
+				text-align: center;
 			}
 		}
 	}
