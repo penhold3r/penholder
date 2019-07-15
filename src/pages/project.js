@@ -4,14 +4,16 @@ import slugify from 'slugify'
 import * as Vibrant from 'node-vibrant'
 import { cors } from '../api/behance'
 
-import Link from '../components/Link'
-import Layout from '../components/Layout'
 import { behanceSingleProject } from '../api/behance'
-
 import toolsColors from '../data/colors-associations'
 
-const ProjectPage = ({ location, match }) => {
+import Link from '../components/Link'
+import Layout from '../components/Layout'
+import Share from '../components/Share'
+
+const ProjectPage = ({ location }) => {
 	const [loading, setLoading] = useState(true)
+	const [shareUrl, setShareURL] = useState('')
 	const [projectColors, setProjectColors] = useState({})
 	const [project, setProject] = useState({
 		description: '',
@@ -21,23 +23,8 @@ const ProjectPage = ({ location, match }) => {
 		url: ''
 	})
 
-	const { id, name, cover } = location.state
+	const { id, name, cover, openGraphImg } = location.state
 	const { description, modules, fields, tools, url } = project
-
-	console.log('COVER: ', cover)
-
-	// const colors =
-	// 	color &&
-	// 	Object.entries(color[0]).reduce((obj, value) => {
-	// 		const key = value[0]
-	// 		const val = value[1] > 200 ? value[1] - 100 : value[1]
-
-	// 		obj[key] = val
-	// 		return obj
-	// 	}, {})
-	// const mainColor = color && `rgb(${colors.r}, ${colors.g}, ${colors.b})`
-
-	const mainColor = `rgb(0, 0, 0)`
 
 	const fetchProject = async id => {
 		const { data } = await axios.get(behanceSingleProject(id))
@@ -49,13 +36,12 @@ const ProjectPage = ({ location, match }) => {
 		process.env.NODE_ENV === 'development' && console.log('BEHANCE PROJECT')
 	}
 
-	id &&
-		useEffect(() => {
+	useEffect(() => {
+		if (id) {
 			const localProject = sessionStorage.getItem(`project-${id}`)
 			process.env.NODE_ENV === 'development' && console.log('LOCAL PROJECT')
 
-			if (localProject) setProject(JSON.parse(localProject))
-			else fetchProject(id)
+			localProject ? setProject(JSON.parse(localProject)) : fetchProject(id)
 
 			const colorPalette = new Vibrant(`${cors}${cover}`)
 			colorPalette.getPalette().then(palette => {
@@ -67,11 +53,13 @@ const ProjectPage = ({ location, match }) => {
 			})
 
 			setLoading(false)
-		}, [])
 
-	console.log('COLORS: ', projectColors)
+			setShareURL(window.location.href)
+		}
+	}, [])
+
 	return (
-		<Layout pageTitle={name}>
+		<Layout pageTitle={name} ogImg={openGraphImg}>
 			<section className="project">
 				<h2
 					className="project__title"
@@ -85,6 +73,12 @@ const ProjectPage = ({ location, match }) => {
 					<span>Loading...</span>
 				) : (
 					<>
+						<Share
+							url={shareUrl}
+							twitterTxt="penHolder Designerd"
+							twitterHash="designerd"
+							whatsappText="penHolder Designerd"
+						/>
 						<div className="fields">
 							{fields &&
 								fields.map((field, key) => (

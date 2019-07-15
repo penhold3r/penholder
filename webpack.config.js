@@ -60,6 +60,10 @@ module.exports = env => {
 					test: /\.(s?css)$/,
 					use: [
 						{
+							loader: 'css-hot-loader',
+							options: {}
+						},
+						{
 							loader: MiniCssExtractPlugin.loader,
 							options: {
 								hmr: process.env.NODE_ENV === 'development',

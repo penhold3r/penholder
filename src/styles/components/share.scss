@@ -1,0 +1,108 @@
+.share-panel {
+	display: flex;
+	justify-content: end;
+	position: sticky;
+	right: 0;
+	top: 53px;
+	height: 40px;
+	margin-top: -21px;
+	z-index: 99;
+
+	&__inner {
+		flex-direction: row-reverse;
+		display: flex;
+		margin: 0 0 0 auto;
+
+		&:hover {
+			.share-panel__options {
+				opacity: 1;
+				width: 200px;
+				right: 0;
+
+				.share-link {
+					margin: 0 0.5rem;
+
+					&.whatsapp {
+						right: 0px;
+					}
+					&.twitter {
+						right: 50px;
+					}
+					&.facebook {
+						right: 100px;
+					}
+				}
+			}
+		}
+	}
+
+	&__btn {
+		background: #fff;
+		border-radius: 50%;
+		border: none;
+		box-shadow: 0 2px 3px rgba($grey, 0.5);
+		cursor: pointer;
+		height: 40px;
+		margin: 0 -1px 0 0.5rem;
+		position: relative;
+		transition: all 0.3s;
+		width: 40px;
+		z-index: 99;
+
+		i {
+			color: $secondary-color;
+			font-size: 1.25rem;
+			line-height: 2.25;
+			margin: 3px 0 0;
+			transition: all 0.3s;
+		}
+
+		&:hover {
+			background: $main-color;
+
+			i {
+				color: #fff;
+			}
+		}
+	}
+
+	&__options {
+		margin: 0;
+		width: 0;
+		transition: all 0.4s ease-in-out;
+		opacity: 0;
+		right: -40px;
+		position: relative;
+
+		.share-link {
+			display: flex;
+			border-radius: 50%;
+			border: none;
+			box-shadow: 0 2px 3px rgba($grey, 0.5);
+			cursor: pointer;
+			height: 40px;
+			position: absolute;
+			margin: 0;
+			right: 0;
+			text-decoration: none;
+			transition: right 0.4s ease-in-out, background-color 0.3s;
+			width: 40px;
+
+			.icon {
+				color: #fff !important;
+				margin: auto;
+				font-size: 1.25rem;
+				line-height: 2.25;
+				transition: all 0.3s;
+			}
+
+			&:hover {
+				background-color: #fff !important;
+
+				.icon {
+					color: inherit !important;
+				}
+			}
+		}
+	}
+}

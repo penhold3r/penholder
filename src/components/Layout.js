@@ -12,7 +12,7 @@ import '../styles/index.scss'
 import ICO from '../images/favicon.ico'
 import PNG from '../images/favicon.png'
 
-const Layout = ({ pageTitle, children, overflow }) => {
+const Layout = ({ pageTitle, ogImg, children, overflow }) => {
 	const title = 'penHolder Designerd'
 	const siteTitle = pageTitle ? `${pageTitle} - ${title}` : title
 	return (
@@ -22,16 +22,53 @@ const Layout = ({ pageTitle, children, overflow }) => {
 				title={siteTitle}
 				meta={[
 					{
+						property: 'og:image',
+						content: ogImg
+					},
+					{
+						name: 'twitter:image',
+						content: ogImg
+					},
+					{
 						name: 'description',
-						content: 'description'
+						content: 'Graphic Design and Stuffs'
 					},
 					{
-						name: 'author',
-						content: title
+						property: 'og:description',
+						content: 'Graphic Design and Stuffs'
 					},
 					{
-						name: 'theme-color',
-						content: '#FF9900'
+						name: 'twitter:description',
+						content: 'Graphic Design and Stuffs'
+					},
+					{
+						property: 'og:title',
+						content: siteTitle
+					},
+					{
+						name: 'twitter:title',
+						content: siteTitle
+					},
+					{
+						property: 'og:url',
+						content: 'https://penholder.net/'
+					},
+					{
+						name: 'twitter:site',
+						content: 'https://penholder.net/'
+					},
+					{
+						property: 'og:type',
+						content: 'Website'
+					},
+					{
+						name: 'twitter:card',
+						content: 'summary_large_image'
+					},
+					{
+						name: 'keywords',
+						content:
+							'diseno, disenador, diseño, diseñador, grafico, gráfico, web, desarrollo, desarrollador, portfolio'
 					}
 				]}
 				link={[
@@ -62,6 +99,7 @@ const Layout = ({ pageTitle, children, overflow }) => {
 
 Layout.propTypes = {
 	title: PropTypes.string,
+	ogImg: PropTypes.string,
 	children: PropTypes.node.isRequired
 }
 

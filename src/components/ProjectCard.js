@@ -12,7 +12,8 @@ const ProjectCard = ({ project: { covers, id, name, slug } }) => {
 					state: {
 						id,
 						name,
-						cover: covers['115']
+						cover: covers['115'],
+						openGraphImg: covers.original
 					}
 				}}
 			>

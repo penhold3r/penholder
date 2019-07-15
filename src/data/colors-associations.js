@@ -20,8 +20,10 @@ export default {
 		{ name: 'Wordpress', color: '#096484' }
 	],
 	social: {
+		Facebook: { color: '#3b5998' },
 		Twitter: { color: '#1da1f2' },
 		Instagram: { color: '#c13584' },
-		GitHub: { color: '#333333' }
+		GitHub: { color: '#333333' },
+		Whatsapp: { color: '#4AC959' }
 	}
 }
