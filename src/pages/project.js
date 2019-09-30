@@ -11,7 +11,7 @@ import Link from '../components/Link'
 import Layout from '../components/Layout'
 import Share from '../components/Share'
 
-const ProjectPage = ({ location }) => {
+const ProjectPage = ({ location, match }) => {
 	const [loading, setLoading] = useState(true)
 	const [shareUrl, setShareURL] = useState('')
 	const [projectColors, setProjectColors] = useState({})
@@ -20,46 +20,67 @@ const ProjectPage = ({ location }) => {
 		modules: [],
 		tools: [],
 		fields: [],
-		url: ''
+		url: '',
+		covers: []
 	})
 
-	const { id, name, cover, openGraphImg } = location.state
 	const { description, modules, fields, tools, url } = project
+	const { id, name, cover, openGraphImg } = location.state || {}
 
 	const fetchProject = async id => {
 		const { data } = await axios.get(behanceSingleProject(id))
-		const { description, modules, tools, fields, url } = data.project
-		const project = { description, modules, tools, fields, url }
+		const { description, modules, tools, fields, url, covers } = data.project
+		const bProject = { description, modules, tools, fields, url, covers }
 
-		sessionStorage.setItem(`project-${id}`, JSON.stringify(project))
-		setProject(project)
+		sessionStorage.setItem(`project-${id}`, JSON.stringify(bProject))
+		setProject(bProject)
+
+		colorPalette(bProject.covers['115'])
+
+		setLoading(false)
 		process.env.NODE_ENV === 'development' && console.log('BEHANCE PROJECT')
 	}
 
+	const colorPalette = cover => {
+		const colorPalette = new Vibrant(`${cors}${cover}`)
+		colorPalette.getPalette().then(palette => {
+			const colors = {
+				primary: palette.DarkVibrant.getHex(),
+				secondary: palette.DarkMuted.getHex()
+			}
+			setProjectColors(colors)
+		})
+	}
+
+	const slugToTitle = slug =>
+		slug
+			.split('-')
+			.join(' ')
+			.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+
 	useEffect(() => {
-		if (id) {
-			const localProject = sessionStorage.getItem(`project-${id}`)
+		const projectId = id || match.params.id
+
+		if (projectId) {
+			const localProject = sessionStorage.getItem(`project-${projectId}`)
 			process.env.NODE_ENV === 'development' && console.log('LOCAL PROJECT')
 
-			localProject ? setProject(JSON.parse(localProject)) : fetchProject(id)
-
-			const colorPalette = new Vibrant(`${cors}${cover}`)
-			colorPalette.getPalette().then(palette => {
-				const colors = {
-					primary: palette.DarkVibrant.getHex(),
-					secondary: palette.DarkMuted.getHex()
-				}
-				setProjectColors(colors)
-			})
-
-			setLoading(false)
+			localProject ? setProject(JSON.parse(localProject)) : fetchProject(projectId)
 
 			setShareURL(window.location.href)
+
+			localProject && colorPalette(cover)
+			localProject && setLoading(false)
 		}
 	}, [])
 
+	console.log('MATCH: ', match)
+
 	return (
-		<Layout pageTitle={name} ogImg={openGraphImg}>
+		<Layout
+			pageTitle={name ? name : slugToTitle(match.params.slug)}
+			ogImg={openGraphImg ? openGraphImg : project.covers.original}
+		>
 			<section className="project">
 				<h2
 					className="project__title"
@@ -67,7 +88,7 @@ const ProjectPage = ({ location }) => {
 						borderBottom: `1px solid ${projectColors ? projectColors.primary : '#666'}`
 					}}
 				>
-					{name}
+					{name ? name : slugToTitle(match.params.slug)}
 				</h2>
 				{loading ? (
 					<span>Loading...</span>

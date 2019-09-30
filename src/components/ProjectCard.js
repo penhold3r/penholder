@@ -8,7 +8,7 @@ const ProjectCard = ({ project: { covers, id, name, slug } }) => {
 			<Link
 				className="project-card__link"
 				to={{
-					pathname: `/projects/${slug.toLowerCase()}`,
+					pathname: `/projects/${id}/${slug.toLowerCase()}`,
 					state: {
 						id,
 						name,

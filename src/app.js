@@ -18,7 +18,7 @@ class App extends Component {
 						<Route exact path="/" component={IndexPage} />
 						<Route path="/about-me" component={AboutPage} />
 						<Route path="/contact" component={ContactPage} />
-						<Route path="/projects/:slug" component={ProjectPage} />
+						<Route path="/projects/:id/:slug" component={ProjectPage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</BrowserRouter>
